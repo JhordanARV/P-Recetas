@@ -1,26 +1,39 @@
 const express = require('express')
 const router = express.Router()
-/*
-const { createRecipe, deleteRecipe, getRecipe, getRecipes, updateRecipe } = require('./actions')
+const fs = require('fs')
+const { v4: uuidv4 } = require('uuid')
 
-// GET all
-router.get('/', getRecipes)
+//const { createRecipe } = require('./actions')
 
-// GET by ID
-router.get('/:id', getRecipe)
+const json_recipes = fs.readFileSync('components/recipe/recipe.json', 'utf-8')
+const recipe = JSON.parse(json_recipes)
 
-// POST Create
-router.post('/', createRecipe)
+router.post('/', (req, res) => {
+    const { title, description, images, preparation, ingredients, notes } = req.body
 
-// PUT Update
-router.put('/:id', updateRecipe)
+    if (!title || !description || !preparation || !ingredients) {
+        res.status(422).send('Entries must have a title')
+    }
 
-// DELETE by ID
-router.delete('/:id', deleteRecipe)
-*/
+    let newRecipe = {
+        id: uuidv4(),
+        title,
+        description,
+        images,
+        preparation,
+        ingredients,
+        notes
+    }
 
-const { createRecipe } = require('./actions')
+    recipe.push(newRecipe)
+    const json_recipe = JSON.stringify(recipe)
+    fs.writeFileSync('components/recipe/recipe.json', json_recipe, 'utf-8')
 
-router.get('/', createRecipe)
+    res.send(newRecipe)
+})
+
+router.get('/', (req, res) => {
+    res.send(json_recipes)
+})
 
 module.exports = router
