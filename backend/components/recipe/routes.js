@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require('uuid')
 //const { createRecipe } = require('./actions')
 
 const json_recipes = fs.readFileSync('components/recipe/recipe.json', 'utf-8')
-const recipe = JSON.parse(json_recipes)
+let recipes = JSON.parse(json_recipes)
 
 router.post('/', (req, res) => {
     const { title, description, images, preparation, ingredients, notes } = req.body
@@ -25,15 +25,31 @@ router.post('/', (req, res) => {
         notes
     }
 
-    recipe.push(newRecipe)
-    const json_recipe = JSON.stringify(recipe)
+    recipes.push(newRecipe)
+    const json_recipe = JSON.stringify(recipes)
     fs.writeFileSync('components/recipe/recipe.json', json_recipe, 'utf-8')
 
     res.send(newRecipe)
 })
 
 router.get('/', (req, res) => {
-    res.send(json_recipes)
+    recipes = JSON.parse(json_recipes)
+    res.send(recipes)
+})
+
+router.get('/:id', (req, res) => {
+    recipes = recipes.filter(recipe => recipe.id == req.params.id)
+    res.send(recipes)
+})
+
+router.delete("/:id", async(req, res)=>{
+
+    recipes = recipes.filter(recipe => recipe.id != req.params.id)
+
+    const json_recipe = JSON.stringify(recipes)
+    fs.writeFileSync('components/recipe/recipe.json', json_recipe, 'utf-8')
+    
+    res.status(200).send({message:"Removed"})
 })
 
 module.exports = router

@@ -1,0 +1,16 @@
+<div class="container p-4">
+    <div class="row">
+        <div *ngFor="let item of lista" class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img src="{{item.images}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{item.title}}</h5>
+                    <p class="card-text">
+                        {{ item.description }}
+                    </p>
+                    <a routerLink="/Receta/{{item.id}}" class="btn btn-primary m-2">Ver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

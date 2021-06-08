@@ -6,6 +6,7 @@ const { PORT } = require('./config')
 // Rutas
 const recipeRoutes = require('./components/recipe/routes')
 const userRoutes = require('./components/user/routes')
+const commentRoutes = require('./components/comment/routes')
 
 // Middleware para permitir recibir solicitudes HTTP desde cualquier dominio
 app.use(cors())
@@ -13,6 +14,7 @@ app.use(express.json())
 
 // Instalación de rutas en el router principal
 app.use('/api/recipe', recipeRoutes)
+app.use('/api/comment', commentRoutes)
 //app.use('/user', userRoutes)
 
 app.use((req, res, next) => {

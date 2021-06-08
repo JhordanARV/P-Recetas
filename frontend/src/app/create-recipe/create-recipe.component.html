@@ -1,0 +1,27 @@
+<div class="container" style="margin-top:50px">
+    <form class="row g-3" (ngSubmit)="createRecipe()" ngNativeValidate>
+        <div class="col-md-12">
+          <label for="marca" class="form-label">Titulo</label>
+          <input [(ngModel)]='newRecipe.title' [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Titulo receta" required>
+        </div>
+        <div class="col-md-12">
+          <label for="modelo" class="form-label">Descripción</label>
+          <input [(ngModel)]='newRecipe.description' [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Descripción" required>
+        </div>
+        <div class="col-12">
+          <label for="color" class="form-label">Ingredientes</label>
+          <input [(ngModel)]='newRecipe.ingredients' [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Ingredientes" required>
+        </div>
+        <div class="col-12">
+          <label for="precio" class="form-label">Preparación</label>
+          <input [(ngModel)]='newRecipe.preparation' [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Preparación" required>
+        </div>
+        <div class="col-12">
+            <label for="precio" class="form-label">Imagen</label>
+            <input [(ngModel)]='newRecipe.images' [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="https://www.imagen.com/imagen.jpg" required>
+          </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Crear</button>
+        </div>
+      </form>
+</div>

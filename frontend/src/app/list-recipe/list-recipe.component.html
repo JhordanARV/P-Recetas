@@ -1,0 +1,42 @@
+<div class="container" style="margin-top:50px">
+
+    <div class="row g-3">
+        <div class="col-sm">
+            <input [(ngModel)]="searchRecetas" type="text" class="form-control" placeholder="Buscar por receta" aria-label="Receta" (keyup)="filter()">
+        </div>
+        <div class="col-sm">
+            <input [(ngModel)]="searchIngredientes" type="text" class="form-control" placeholder="Buscar por ingredientes" aria-label="Ingredientes" (keyup)="filter()">
+        </div>
+        <div class="col-sm">
+            <input [(ngModel)]="searchAutores" type="text" class="form-control" placeholder="Buscar por autor" aria-label="Autor" (keyup)="filter()"> 
+        </div>
+    </div>
+<br>
+    <div class="row">
+        <div *ngFor="let item of lista" class="col-md-12">
+
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{item.images}}" alt="..." width="100%">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.title}}</h5>
+                            <p class="card-text">
+                                {{ item.description }}
+                            </p>
+                            <p class="card-text"><small class="text-muted">
+                                    {{ item.notes }}
+                                </small></p>
+                        </div>
+                        <div class="card-footer">
+                            <a routerLink="/Receta/{{item.id}}" class="btn btn-primary m-2">Ver</a>
+                            <button type="button" class="btn btn-danger m-2" (click)="delete(item)">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

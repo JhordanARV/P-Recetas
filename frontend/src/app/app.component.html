@@ -12,7 +12,7 @@
           <a class="nav-link active" aria-current="page" href="#">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/crear">Recetas</a>
+          <a class="nav-link" routerLink="/Recetas">Recetas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Login</a>
@@ -29,51 +29,16 @@
   </button>
 </div>
 
-<style>
-.contenedorAgregar{
-  width:90px;
-  height:240px;
-  position:absolute;
-  right:0px;
-  bottom:0px;
-}
-.botonAgregar{
-  width:60px;
-  height:60px;
-  border-radius:100%;
-  background:#F44336;
-  right:0;
-  bottom:0;
-  position:absolute;
-  margin-right:16px;
-  margin-bottom:16px;
-  border:none;
-  outline:none;
-  color:#FFF;
-  font-size:36px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  transition:.3s;  
-}
-span{
-  transition:.5s;  
-}
-.botonAgregar:hover span{
-  transform:rotate(360deg);
-}
-.botonAgregar:active{
-  transform:scale(1.1);
-}
-
-</style>
-
   <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
     id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Colored with scrolling</h5>
+      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Crear receta</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <p>Try scrolling the rest of the page to see this option in action.</p>
+      <p>Comparte tu receta favorita</p>
+
+      <app-create-recipe></app-create-recipe>
     </div>
   </div>
 

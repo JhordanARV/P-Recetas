@@ -13,8 +13,21 @@ export class RecipesService {
     return this.http.post<any>(this.urlGeneral, recipe)
   }
 
-  listRecipe(){
-    return this.http.get<any>(this.urlGeneral+"listRecipe/")
+  topRecipe(){
+    return this.http.get<any>(this.urlGeneral)
+  }
+
+  listRecipes(){
+    return this.http.get<any>(this.urlGeneral)
+  }
+
+  listRecipe(id:string){
+    return this.http.get<any>(this.urlGeneral+id)
+  }
+
+  deleteRecipe(recipe:any){
+    const id = recipe.id
+    return this.http.delete<any>(this.urlGeneral+id)
   }
 
 }
