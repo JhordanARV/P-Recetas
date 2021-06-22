@@ -1,59 +1,70 @@
 <div class="container p-4">
     <div class="row">
-        <div *ngFor="let item of viewRecipe" class="col-md-12">
+        <div class="col-md-12">
 
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="{{item.images}}" alt="..." width="100%">
+                        <img src="{{ viewRecipe.images }}" alt="..." width="100%">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h3 class="card-title text-danger">{{item.title}}</h3>
+                            <h3 class="card-title text-danger">{{viewRecipe.title}}</h3>
                             <p class="card-text">
-                                {{ item.description }}
+                                {{ viewRecipe.description }}
                             </p>
                             <hr>
                             <h5><strong>Ingredientes</strong></h5>
-                            {{ item.ingredients }}
+                            {{ viewRecipe.ingredients }}
                             <p class="card-text"><small class="text-muted">
-                                    {{ item.notes }}
+                                    {{ viewRecipe.notes }}
                                 </small></p>
                         </div>
                         <div class="card-footer">
                             <h5><strong>Preparación</strong></h5>
-                            {{ item.preparation }}
+                            {{ viewRecipe.preparation }}
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!--Comentarios-->
-        <div>
-            <h3><strong>Comentarios</strong></h3>
-
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Comentanos como te fue con la receta</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-
-            <div *ngFor="let item of lista" class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-2">
-                        <img src="../../assets/images/default.png" alt="..." width="100%">
+            <!--Comentarios-->
+            <div>
+                <h3><strong>Comentarios</strong></h3>
+                <form class="row g-3" (ngSubmit)="createComment()" ngNativeValidate>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Comentanos como te fue con la
+                            receta</label>
+                        <textarea [formControlName="ctrl"] class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <input [(ngModel)]='newComment.id_recipe' [ngModelOptions]="{standalone: true}" type="hidden" class="form-control">
                     </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{item.usuario}}</h5>
-                            <p class="card-text">
-                                {{item.comment}}
-                            </p>
-                            <p class="card-text"><small class="text-muted">{{item.fecha}}</small></p>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </form>
+                <hr>
+                <div *ngFor="let item2 of listComments" >
+                    <div *ngIf="viewRecipe.id == item2.id_recipe" class="card mb-3">
+                        <div class="row g-1">
+                            
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{item2.usuario}}</h5>
+                                    <p class="card-text">
+                                        {{item2.comment}}
+                                    </p>
+                                    <p class="card-text"><small class="text-muted">{{item2.fecha}}</small></p>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-danger m-2" (click)="deleteComment(item2)" >Eliminar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
+
         </div>
 
     </div>

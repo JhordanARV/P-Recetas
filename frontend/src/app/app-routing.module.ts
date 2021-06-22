@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TopRecipeComponent } from './top-recipe/top-recipe.component'
 import { ListRecipeComponent } from './list-recipe/list-recipe.component'
 import { ViewRecipeComponent } from './view-recipe/view-recipe.component'
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { 
@@ -18,8 +19,11 @@ const routes: Routes = [
   },
   {
     path: "Receta/:id",
-    component: ViewRecipeComponent,
-    pathMatch: 'full'
+    component: ViewRecipeComponent
+  },
+  {
+    path: "**",
+    component: PageNotFoundComponent
   }
 ];
 

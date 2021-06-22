@@ -24,7 +24,7 @@ export class ListRecipeComponent implements OnInit {
   ngOnInit(): void {
     this.recipe.listRecipes().subscribe(
       (res) => {
-        this.lista = res
+        this.lista = res.reverse()
         this.listaInit = res
       },
       (err)=>{ 

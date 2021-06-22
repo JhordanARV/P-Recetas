@@ -18,6 +18,8 @@ import { ListRecipeComponent } from './list-recipe/list-recipe.component';
 import { TopRecipeComponent } from './top-recipe/top-recipe.component';
 import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
+import { CommentsService } from './comments.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
     ListRecipeComponent,
     TopRecipeComponent,
     ViewRecipeComponent,
-    CreateRecipeComponent
+    CreateRecipeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [RecipesService],
+  providers: [RecipesService,CommentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

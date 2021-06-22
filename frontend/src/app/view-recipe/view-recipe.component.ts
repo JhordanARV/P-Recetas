@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 
 import { RecipesService } from '../recipes.service'
 import { CommentsService } from '../comments.service'
@@ -11,14 +12,27 @@ import { ActivatedRoute, Router } from '@angular/router'
 })
 export class ViewRecipeComponent implements OnInit {
 
+  ctrl = new FormControl('prueba', [])
+
   constructor(
     private router: Router, 
+    private route: ActivatedRoute,
     private recipe: RecipesService,
-    private comment: CommentsService,
-    private route: ActivatedRoute
+    private comment: CommentsService
   ) { }
 
+  id = this.route.snapshot.params.id
+
+  newComment: any = {
+    comment: "",
+    id_recipe: this.id
+  }
+
+  listComments:any = []
+  listRecipe:any = []
+
   viewRecipe: any = {
+    id: "",
     title: "",
     description: "",
     images: "",
@@ -27,28 +41,19 @@ export class ViewRecipeComponent implements OnInit {
     notes: ""
   }
 
-  viewComment: any = {
-    id: "",
-    usuario: "",
-    comment: "",
-    id_recipe: "",
-    fecha: ""
-  }
-
-  listaInit:any = []
-  lista:any = []
-
   ngOnInit(): void {
     this.checkRecipe()
     this.checkComments()
   }
 
   checkRecipe(){
-    let id = this.route.snapshot.params.id
-    console.log(id)
-    this.recipe.listRecipe(id).subscribe(
+    
+    this.recipe.listRecipe(this.id).subscribe(
       (res) => {
-        this.viewRecipe = res
+        for (let item of res){
+          this.viewRecipe = item
+        }
+        console.log(this.viewRecipe)
       },
       (err)=>{ 
         console.log(err)
@@ -59,11 +64,46 @@ export class ViewRecipeComponent implements OnInit {
   checkComments(){
     this.comment.listComments().subscribe(
       (res) => {
-        this.lista = res
-        this.listaInit = res
+        this.listComments = res.reverse()
       },
       (err)=>{ 
         console.log(err)
+      }
+    )
+  }
+
+  createComment(){
+    this.comment.createComment(this.newComment).subscribe(
+      (res) => {
+        //console.log(res)
+        this.listComments
+        
+        /*const commentId = res ? res.id_recipe : null
+        console.log(commentId)
+        this.router.navigate(["/Receta/" + commentId])*/
+
+        setTimeout(()=>{
+          this.ngOnInit()
+          this.newComment
+        }, 1000);
+        
+      },
+      (err) => {
+        console.log(err)
+      }
+    )
+  }
+
+  deleteComment(commentSelect:String){
+    this.comment.deleteComment(commentSelect).subscribe(
+      (res)=>{
+        const index = this.listComments.indexOf(commentSelect)
+        if(index > -1){
+          this.listComments.splice(index,1)
+        }
+      },
+      (err)=>{
+      console.log(err)
       }
     )
   }

@@ -9,7 +9,7 @@ let comments = JSON.parse(json_comment)
 router.post('/', (req, res) => {
     const { usuario, comment, id_recipe, fecha} = req.body
 
-    if (!usuario || !comment || !id_recipe) {
+    if (!comment || !id_recipe) {
         res.status(422).send('Entries must have a title')
     }
 
@@ -28,6 +28,8 @@ router.post('/', (req, res) => {
         fecha: today
         
     }
+
+    console.log(req.body)
 
     comments.push(newComment)
     const json_comment = JSON.stringify(comments)
